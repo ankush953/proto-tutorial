@@ -81,6 +81,7 @@ type Person struct {
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Phones        []*Person_PhoneNumber  `protobuf:"bytes,4,rep,name=phones,proto3" json:"phones,omitempty"`
 	LastUpdated   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty"`
+	OrderToAmount map[string]int32       `protobuf:"bytes,6,rep,name=orderToAmount,proto3" json:"orderToAmount,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -146,6 +147,13 @@ func (x *Person) GetPhones() []*Person_PhoneNumber {
 func (x *Person) GetLastUpdated() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastUpdated
+	}
+	return nil
+}
+
+func (x *Person) GetOrderToAmount() map[string]int32 {
+	if x != nil {
+		return x.OrderToAmount
 	}
 	return nil
 }
@@ -251,16 +259,20 @@ var File_proto_addressbook_proto protoreflect.FileDescriptor
 
 const file_proto_addressbook_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/addressbook.proto\x12\btutorial\x1a\x1fgoogle/protobuf/timestamp.proto\"\x87\x02\n" +
+	"\x17proto/addressbook.proto\x12\btutorial\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x03\n" +
 	"\x06Person\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x05R\x02id\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x124\n" +
 	"\x06phones\x18\x04 \x03(\v2\x1c.tutorial.Person.PhoneNumberR\x06phones\x12=\n" +
-	"\flast_updated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\x1aN\n" +
+	"\flast_updated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\x12I\n" +
+	"\rorderToAmount\x18\x06 \x03(\v2#.tutorial.Person.OrderToAmountEntryR\rorderToAmount\x1aN\n" +
 	"\vPhoneNumber\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\tR\x06number\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.tutorial.PhoneTypeR\x04type\"7\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.tutorial.PhoneTypeR\x04type\x1a@\n" +
+	"\x12OrderToAmountEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"7\n" +
 	"\vAddressBook\x12(\n" +
 	"\x06people\x18\x01 \x03(\v2\x10.tutorial.PersonR\x06people*h\n" +
 	"\tPhoneType\x12\x1a\n" +
@@ -282,24 +294,26 @@ func file_proto_addressbook_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_addressbook_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_proto_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_addressbook_proto_goTypes = []any{
 	(PhoneType)(0),                // 0: tutorial.PhoneType
 	(*Person)(nil),                // 1: tutorial.Person
 	(*AddressBook)(nil),           // 2: tutorial.AddressBook
 	(*Person_PhoneNumber)(nil),    // 3: tutorial.Person.PhoneNumber
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	nil,                           // 4: tutorial.Person.OrderToAmountEntry
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_proto_addressbook_proto_depIdxs = []int32{
 	3, // 0: tutorial.Person.phones:type_name -> tutorial.Person.PhoneNumber
-	4, // 1: tutorial.Person.last_updated:type_name -> google.protobuf.Timestamp
-	1, // 2: tutorial.AddressBook.people:type_name -> tutorial.Person
-	0, // 3: tutorial.Person.PhoneNumber.type:type_name -> tutorial.PhoneType
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 1: tutorial.Person.last_updated:type_name -> google.protobuf.Timestamp
+	4, // 2: tutorial.Person.orderToAmount:type_name -> tutorial.Person.OrderToAmountEntry
+	1, // 3: tutorial.AddressBook.people:type_name -> tutorial.Person
+	0, // 4: tutorial.Person.PhoneNumber.type:type_name -> tutorial.PhoneType
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_proto_addressbook_proto_init() }
@@ -313,7 +327,7 @@ func file_proto_addressbook_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_addressbook_proto_rawDesc), len(file_proto_addressbook_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

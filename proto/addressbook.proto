@@ -17,6 +17,7 @@ message Person {
   repeated PhoneNumber phones = 4;
 
   google.protobuf.Timestamp last_updated = 5;
+  map<string, int32> orderToAmount = 6;
 }
 
 enum PhoneType {

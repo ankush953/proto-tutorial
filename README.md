@@ -1,21 +1,20 @@
 # proto-tutorial
 ## Table of contents
 [Best Practices](#best-pratices)  
+[Scalar Type](#scalar-type)  
 [Default Field Values](#default-fields)  
+[Maps in protocol buffer](#maps)  
 [Updating a mesage type](#updating-a-message-type)  
 [Extending a Protocol Buffer](#extending-a-protocol-buffer)  
 [Exceptions for protocol buffer extension](#exceptions)
 
 ## Best Pratices
-Link: https://protobuf.dev/best-practices/dos-donts/   
+Link: https://protobuf.dev/best-practices/dos-donts/  
 
-## Updating a Message Type
-Link: https://protobuf.dev/programming-guides/proto3/#updating  
-You will need to update the proto message defintions from time to time based on requirements. In this case, Please read below in order
-1. [Best Practices](#best-pratices) 
-2. [Updating Mesage Type](#updating-a-message-type)
-3. [Extending protocol buffer](#extending-a-protocol-buffer)
-4. [Exceptions for extension rules](#exceptions)
+
+## Scalar Type
+Link: https://protobuf.dev/programming-guides/proto3/#scalar  
+You can consider this as native data types supported by Proto. 
 
 ## Default Fields
 Link: https://protobuf.dev/programming-guides/proto3/#default  
@@ -25,6 +24,21 @@ Link: https://protobuf.dev/programming-guides/proto3/#default
 - For numeric types, the default value is zero.
 - For message fields, the field is not set. Its exact value is language-dependent. See the generated code guide for details.
 - For enums, the default value is the first defined enum value, which must be 0.
+
+## Maps
+Link: https://protobuf.dev/programming-guides/proto3/#maps  
+You can have it as 
+```protobuf
+map<string, int32> orderToAmount = 6;
+```
+
+## Updating a Message Type
+Link: https://protobuf.dev/programming-guides/proto3/#updating  
+You will need to update the proto message defintions from time to time based on requirements. In this case, Please read below in order
+1. [Best Practices](#best-pratices) 
+2. [Updating Mesage Type](#updating-a-message-type)
+3. [Extending protocol buffer](#extending-a-protocol-buffer)
+4. [Exceptions for extension rules](#exceptions)
 
 ## Extending a protocol Buffer
 Link: https://protobuf.dev/getting-started/gotutorial/#extending-a-protobuf  
