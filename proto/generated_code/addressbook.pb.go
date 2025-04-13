@@ -158,6 +158,58 @@ func (x *Person) GetOrderToAmount() map[string]int32 {
 	return nil
 }
 
+type SingularCardinalityDemo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OptionalField *int32                 `protobuf:"varint,1,opt,name=optionalField,proto3,oneof" json:"optionalField,omitempty"`
+	ImplicitField int32                  `protobuf:"varint,2,opt,name=implicitField,proto3" json:"implicitField,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SingularCardinalityDemo) Reset() {
+	*x = SingularCardinalityDemo{}
+	mi := &file_proto_addressbook_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SingularCardinalityDemo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SingularCardinalityDemo) ProtoMessage() {}
+
+func (x *SingularCardinalityDemo) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_addressbook_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SingularCardinalityDemo.ProtoReflect.Descriptor instead.
+func (*SingularCardinalityDemo) Descriptor() ([]byte, []int) {
+	return file_proto_addressbook_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SingularCardinalityDemo) GetOptionalField() int32 {
+	if x != nil && x.OptionalField != nil {
+		return *x.OptionalField
+	}
+	return 0
+}
+
+func (x *SingularCardinalityDemo) GetImplicitField() int32 {
+	if x != nil {
+		return x.ImplicitField
+	}
+	return 0
+}
+
 // Our address book file is just one of these.
 type AddressBook struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -168,7 +220,7 @@ type AddressBook struct {
 
 func (x *AddressBook) Reset() {
 	*x = AddressBook{}
-	mi := &file_proto_addressbook_proto_msgTypes[1]
+	mi := &file_proto_addressbook_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -180,7 +232,7 @@ func (x *AddressBook) String() string {
 func (*AddressBook) ProtoMessage() {}
 
 func (x *AddressBook) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_addressbook_proto_msgTypes[1]
+	mi := &file_proto_addressbook_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -193,7 +245,7 @@ func (x *AddressBook) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressBook.ProtoReflect.Descriptor instead.
 func (*AddressBook) Descriptor() ([]byte, []int) {
-	return file_proto_addressbook_proto_rawDescGZIP(), []int{1}
+	return file_proto_addressbook_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddressBook) GetPeople() []*Person {
@@ -213,7 +265,7 @@ type Person_PhoneNumber struct {
 
 func (x *Person_PhoneNumber) Reset() {
 	*x = Person_PhoneNumber{}
-	mi := &file_proto_addressbook_proto_msgTypes[2]
+	mi := &file_proto_addressbook_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -225,7 +277,7 @@ func (x *Person_PhoneNumber) String() string {
 func (*Person_PhoneNumber) ProtoMessage() {}
 
 func (x *Person_PhoneNumber) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_addressbook_proto_msgTypes[2]
+	mi := &file_proto_addressbook_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -272,7 +324,11 @@ const file_proto_addressbook_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\x0e2\x13.tutorial.PhoneTypeR\x04type\x1a@\n" +
 	"\x12OrderToAmountEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"7\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"|\n" +
+	"\x17SingularCardinalityDemo\x12)\n" +
+	"\roptionalField\x18\x01 \x01(\x05H\x00R\roptionalField\x88\x01\x01\x12$\n" +
+	"\rimplicitField\x18\x02 \x01(\x05R\rimplicitFieldB\x10\n" +
+	"\x0e_optionalField\"7\n" +
 	"\vAddressBook\x12(\n" +
 	"\x06people\x18\x01 \x03(\v2\x10.tutorial.PersonR\x06people*h\n" +
 	"\tPhoneType\x12\x1a\n" +
@@ -294,19 +350,20 @@ func file_proto_addressbook_proto_rawDescGZIP() []byte {
 }
 
 var file_proto_addressbook_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_addressbook_proto_goTypes = []any{
-	(PhoneType)(0),                // 0: tutorial.PhoneType
-	(*Person)(nil),                // 1: tutorial.Person
-	(*AddressBook)(nil),           // 2: tutorial.AddressBook
-	(*Person_PhoneNumber)(nil),    // 3: tutorial.Person.PhoneNumber
-	nil,                           // 4: tutorial.Person.OrderToAmountEntry
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(PhoneType)(0),                  // 0: tutorial.PhoneType
+	(*Person)(nil),                  // 1: tutorial.Person
+	(*SingularCardinalityDemo)(nil), // 2: tutorial.SingularCardinalityDemo
+	(*AddressBook)(nil),             // 3: tutorial.AddressBook
+	(*Person_PhoneNumber)(nil),      // 4: tutorial.Person.PhoneNumber
+	nil,                             // 5: tutorial.Person.OrderToAmountEntry
+	(*timestamppb.Timestamp)(nil),   // 6: google.protobuf.Timestamp
 }
 var file_proto_addressbook_proto_depIdxs = []int32{
-	3, // 0: tutorial.Person.phones:type_name -> tutorial.Person.PhoneNumber
-	5, // 1: tutorial.Person.last_updated:type_name -> google.protobuf.Timestamp
-	4, // 2: tutorial.Person.orderToAmount:type_name -> tutorial.Person.OrderToAmountEntry
+	4, // 0: tutorial.Person.phones:type_name -> tutorial.Person.PhoneNumber
+	6, // 1: tutorial.Person.last_updated:type_name -> google.protobuf.Timestamp
+	5, // 2: tutorial.Person.orderToAmount:type_name -> tutorial.Person.OrderToAmountEntry
 	1, // 3: tutorial.AddressBook.people:type_name -> tutorial.Person
 	0, // 4: tutorial.Person.PhoneNumber.type:type_name -> tutorial.PhoneType
 	5, // [5:5] is the sub-list for method output_type
@@ -321,13 +378,14 @@ func file_proto_addressbook_proto_init() {
 	if File_proto_addressbook_proto != nil {
 		return
 	}
+	file_proto_addressbook_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_addressbook_proto_rawDesc), len(file_proto_addressbook_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

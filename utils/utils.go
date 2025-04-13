@@ -9,6 +9,10 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+const (
+	DATABASE = "gateways/database.txt"
+)
+
 func GetAll(database string) *generated_code.AddressBook {
 	content, err := os.ReadFile(database)
 	if err != nil {

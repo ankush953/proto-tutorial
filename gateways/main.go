@@ -10,15 +10,19 @@ import (
 const DATABASE = "gateways/database.txt"
 
 func main() {
-	fmt.Print("Please enter\n1. To list people\n2.To add person\nPress any other for exit ")
+	fmt.Printf("Please enter\n1. list_people \n2.To add_people\n3. singularity_demo\n4. enum_demo\nEnter option: ")
+	operationsMap := map[string]interface{}{
+		"1": command.ListPeople,
+		"2": command.AddPeople,
+		"3": command.SingularityDemo,
+		"4": command.EnumDemo,
+	}
 	var operation string
 	fmt.Scanln(&operation)
-	if operation == "1" {
-		command.ListPeople(DATABASE)
-	}else if operation == "2" {
-		command.AddPeople(DATABASE)
-	}else {
-		fmt.Printf("Thank you for using address book services")
-		os.Exit(0)
+	fn, ok := operationsMap[operation]
+	if ok {
+		fn.(func())()
 	}
+	fmt.Printf("Thank you for using address book services")
+	os.Exit(0)
 }
