@@ -20,6 +20,11 @@ message Person {
   map<string, int32> orderToAmount = 6;
 }
 
+message SingularCardinalityDemo {
+  optional int32 optionalField = 1;
+  int32 implicitField = 2;
+}
+
 enum PhoneType {
   PHONE_TYPE_UNSPECIFIED = 0;
   PHONE_TYPE_MOBILE = 1;

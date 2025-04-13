@@ -9,21 +9,21 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-func AddPeople(database string) {
-	fmt.Println("You have selected operation: add person")
-	addressBook := utils.GetAll(database)
+func AddPeople() {
+	fmt.Printf("\n=========ADD PEOPLE============\n")
+	addressBook := utils.GetAll(utils.DATABASE)
 	takeInput(addressBook)
 	content, err := proto.Marshal(addressBook)
 	if err != nil {
 		fmt.Printf("error when marshalling person: %v", err)
 		os.Exit(1)
 	}
-	err = os.WriteFile(database, content, 0666)
+	err = os.WriteFile(utils.DATABASE, content, 0666)
 	if err != nil {
 		fmt.Printf("error when writing address book: %v to database. err: %v", addressBook, err)
 		os.Exit(1)
 	}
-	fmt.Print("records written successfully")
+	fmt.Printf("records written successfully\n")
 }
 
 func takeInput(ab *generated_code.AddressBook){
