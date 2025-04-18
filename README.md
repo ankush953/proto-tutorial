@@ -137,3 +137,13 @@ enum DESTINATION {
 ```
 "ENAA_RUNNING" uses the same enum value as "ENAA_STARTED". If this is intended, set 'option allow_alias = true;' to the enum definition. The next available enum value is 3.
 ```
+
+## How to move .proto files effectively
+By default, you can use definitions only from directly imported .proto files. However, sometimes you may need to move a .proto file to a new location. Instead of moving the .proto file directly and updating all the call sites in a single change, you can put a placeholder .proto file in the old location to forward all the imports to the new location using the import public notion.
+
+One thing that's not metioned in document but should be is that if you are importing the *.pb.go, you should have moved enum different name than old one. 
+
+Also, `proto/generated_code/enum_demo.pb.go` is able to resolve `proto/generated_code/enum/enum_demo.pb.go` but `proto/generated_code/addressbook.pb.go` isn't able to resolve same `proto/generated_code/enum/enum_demo.pb.go`
+
+So for now, I've to change the file name of `proto/enums/enum_demo.proto` to unique name `proto/enums/new_enum_demo.proto`. Result: Doesn't work. Probably it's about directory structure.
+Now, I've set `option go_package = "proto/generated_code";` for all the proto. It's working fine. Need to look into how `import public` works.
