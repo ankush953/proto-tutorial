@@ -16,6 +16,7 @@ func main() {
 		"2": command.AddPeople,
 		"3": command.SingularityDemo,
 		"4": command.EnumDemo,
+		"5": command.AnyDemo,
 	}
 	var operation string
 	fmt.Scanln(&operation)
