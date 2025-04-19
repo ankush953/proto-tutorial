@@ -182,6 +182,9 @@ service PersonService {
     rpc Search(SearchRequest) returns (SearchResponse);
 }
 ```
+Just found on [this page](https://protobuf.dev/reference/go/go-generated/#service) that
+
+The Go code generator does not produce output for services by default. If you enable the gRPC plugin (see the gRPC Go Quickstart guide) then code will be generated to support gRPC. 
 
 ## Reading list
 - [ ] [Explains what's generated in go protobuf compliation](https://protobuf.dev/reference/go/go-generated/)  
