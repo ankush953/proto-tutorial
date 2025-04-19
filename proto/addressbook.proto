@@ -38,3 +38,7 @@ enum PhoneType {
 message AddressBook {
   repeated Person people = 1;
 }
+
+message PhoneBook {
+  repeated Person.PhoneNumber phone_numbers = 1;
+}
