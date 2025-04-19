@@ -10,7 +10,9 @@
 [Extension](#extensions)
 [Assigning field numbers](#assining-field-numbers)  
 [Reserve field numbers](#reserve-field-numbers)   
-[How Message wiring happens in protobuf](#how-protocol-buffers-encode-data)
+[How Message wiring happens in protobuf](#how-protocol-buffers-encode-data)  
+[How to move .proto files without much changes](#how-to-move-proto-files-effectively)  
+[Nested messages](#nested-messages)
 
 ## Best Pratices
 Link: https://protobuf.dev/best-practices/dos-donts/  
@@ -147,3 +149,11 @@ Also, `proto/generated_code/enum_demo.pb.go` is able to resolve `proto/generated
 
 So for now, I've to change the file name of `proto/enums/enum_demo.proto` to unique name `proto/enums/new_enum_demo.proto`. Result: Doesn't work. Probably it's about directory structure.
 Now, I've set `option go_package = "proto/generated_code";` for all the proto. It's working fine. Need to look into how `import public` works.
+
+## Nested messages
+You can nest messages inside. For Example, you have `PhoneNumber` message inside `Person` message. If you want to access it in any other proto, you can use it as `Person.PhoneNumber`. 
+```protobuf
+message PhoneBook {
+  repeated Person.PhoneNumber phone_numbers = 1;
+}
+```
