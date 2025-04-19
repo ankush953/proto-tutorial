@@ -1,0 +1,11 @@
+syntax = "proto3";
+option go_package="proto/generated_code";
+
+message OneofDemo {
+    optional string pan = 1;
+    oneof aadhar_or_registration {
+        string aadhar = 2;
+        string registration = 3;
+    }
+    optional string zip = 4;
+}

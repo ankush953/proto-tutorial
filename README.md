@@ -12,7 +12,8 @@
 [Reserve field numbers](#reserve-field-numbers)   
 [How Message wiring happens in protobuf](#how-protocol-buffers-encode-data)  
 [How to move .proto files without much changes](#how-to-move-proto-files-effectively)  
-[Nested messages](#nested-messages)
+[Nested messages](#nested-messages)  
+[OneOf](#oneof-usage)
 
 ## Best Pratices
 Link: https://protobuf.dev/best-practices/dos-donts/  
@@ -156,4 +157,18 @@ You can nest messages inside. For Example, you have `PhoneNumber` message inside
 message PhoneBook {
   repeated Person.PhoneNumber phone_numbers = 1;
 }
+```
+
+## OneOf usage
+You may encouter a scenario where you have multiple fields but under any circumstance, it's guaranteed that only one of these fields will be set. Example: If there is field for aadhar number, in case aadhar is not yet done, you have option of setting registration but there is not point of keeping both. 
+
+- Fields in oneofs must not have labels (required/optional/repeated)
+- If you set any field, previously set field will be reset (if any).
+- You cannot have `map` or `repeated` field inside Oneof. 
+- If you wish to have `repeated` field, have that in another message and use in `oneof` field. 
+- Be mindset of removing `oneof` fields as it can introduce backward compatibility issue.
+- You can use below snippet to get which field is set.
+```protobuf
+aadharOrRegistrationDescriptor := demo.ProtoReflect().Descriptor().Oneofs().ByName("aadhar_or_registration")
+field := demo.ProtoReflect().WhichOneof(aadharOrRegistrationDescriptor)
 ```
