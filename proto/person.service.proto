@@ -1,0 +1,19 @@
+syntax = "proto3";
+option go_package="proto/generated_code";
+
+service PersonService {
+    rpc Search(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest{
+    optional string login = 1;
+    optional string email = 2;
+    optional string q = 3;
+}
+
+message SearchResponse{
+    optional string login = 1;
+    optional string email = 2;
+    optional string zip = 3;
+    optional string country = 4;
+}

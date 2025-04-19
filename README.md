@@ -13,7 +13,9 @@
 [How Message wiring happens in protobuf](#how-protocol-buffers-encode-data)  
 [How to move .proto files without much changes](#how-to-move-proto-files-effectively)  
 [Nested messages](#nested-messages)  
-[OneOf](#oneof-usage)
+[OneOf](#oneof-usage)  
+[Defining Services](#defining-services)  
+[Reading list](#reading-list)
 
 ## Best Pratices
 Link: https://protobuf.dev/best-practices/dos-donts/  
@@ -172,3 +174,16 @@ You may encouter a scenario where you have multiple fields but under any circums
 aadharOrRegistrationDescriptor := demo.ProtoReflect().Descriptor().Oneofs().ByName("aadhar_or_registration")
 field := demo.ProtoReflect().WhichOneof(aadharOrRegistrationDescriptor)
 ```
+
+## Defining services
+There isn't much detail on proto. Will add details from gRPC. For starting, this is how you can define a RPC service.
+```protobuf
+service PersonService {
+    rpc Search(SearchRequest) returns (SearchResponse);
+}
+```
+
+## Reading list
+- [ ] [Explains what's generated in go protobuf compliation](https://protobuf.dev/reference/go/go-generated/)  
+- [ ] [Message wire format](https://protobuf.dev/programming-guides/encoding/)
+- [ ] [gRPC](#https://grpc.io/)
