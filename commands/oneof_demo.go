@@ -19,11 +19,15 @@ func OneofDemo() {
 	demo := &generated_code.OneofDemo{
 		Pan:                  &pan,
 		Zip:                  &zip,
-		AadharOrRegistration: &generated_code.OneofDemo_Aadhar{},
+		AadharOrRegistration: nil,
 	}
 	aadharOrRegistrationDescriptor := demo.ProtoReflect().Descriptor().Oneofs().ByName("aadhar_or_registration")
 	field := demo.ProtoReflect().WhichOneof(aadharOrRegistrationDescriptor)
-	fmt.Printf("Currently set Oneof field: %v, aadhar: %v, registration: %v\n", field.FullName(), demo.GetAadhar(), demo.GetRegistration())
+	if field == nil {
+		fmt.Println("aadhar_or_registration is not set yet")
+	} else {
+		fmt.Printf("Currently set Oneof field: %v, aadhar: %v, registration: %v\n", field.FullName(), demo.GetAadhar(), demo.GetRegistration())
+	}
 	demo.AadharOrRegistration = aadhar
 	field = demo.ProtoReflect().WhichOneof(aadharOrRegistrationDescriptor)
 	fmt.Printf("Currently set Oneof field: %v, aadhar: %v, registration: %v\n", field.FullName(), demo.GetAadhar(), demo.GetRegistration())
