@@ -186,4 +186,4 @@ service PersonService {
 ## Reading list
 - [ ] [Explains what's generated in go protobuf compliation](https://protobuf.dev/reference/go/go-generated/)  
 - [ ] [Message wire format](https://protobuf.dev/programming-guides/encoding/)
-- [ ] [gRPC](#https://grpc.io/)
+- [ ] [gRPC](https://grpc.io/)
